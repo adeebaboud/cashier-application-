@@ -1,0 +1,22 @@
+.order-cart{
+    header{
+        text-align: center;
+        color: $fg;
+        padding: auto 5%;
+    }
+    .button{
+        text-align: center;
+        img{
+            display: inline-block;
+            width: 30%;
+        }
+        span{
+            display: block;
+        }
+        &.button-big{
+            height: auto;
+            padding-top: 10px;
+        }
+    }
+}
+

@@ -1,0 +1,93 @@
+@mixin to-color($hcolor,$btn-bg,$btn-color){
+     header{
+        text-align: center;
+         h4{
+             color:$hcolor;
+        }
+        p{
+            color: $fg;
+        }
+    }
+    .button.button-fill{
+        background:$btn-bg;
+        color:$btn-color;
+    }
+}
+
+@mixin calender($color,$icon){
+    .content-block-inner{
+        background: transparent;
+    }
+    .picker-calendar-day{
+        color: $color;
+        &.picker-calendar-day-disabled{
+             color: lighten($grey,15%);
+        }
+    }
+    .picker-calendar-day.picker-calendar-day-next, .picker-calendar-day.picker-calendar-day-prev{
+        color: lighten($grey,15%);
+    }
+    .calendar-custom-toolbar{
+        .center{
+            color: $color;
+            }
+        .left{
+            .icon_back{
+                width: 19px;
+                height: 20px;
+                background:url('#{$img_src}/icons/icon-back-#{$icon}.svg') 0 no-repeat;
+            }
+        }
+        .right{
+            .icon_forward{
+                width: 19px;
+                height: 20px;
+                 background:url('#{$img_src}/icons/icon-forward-#{$icon}.svg') 0 no-repeat;
+            }
+        }
+     }
+    .calendar-custom-toolbar{
+        .center{
+            color: $color;
+            }
+        .left{
+            .icon_back{
+                width: 19px;
+                height: 20px;
+                background:url('#{$img_src}/icons/icon-back-#{$icon}.svg') 0 no-repeat;
+            }
+        }
+        .right{
+            .icon_forward{
+                width: 19px;
+                height: 20px;
+                background:url('#{$img_src}/icons/icon-forward-#{$icon}.svg') 0 no-repeat;
+            }
+        }
+     }
+        .picker-calendar-day.picker-calendar-day-selected span{
+        background: $color;
+    }
+}
+
+ ////////////////////////////
+.content-block-inner{
+    margin-bottom: 25px;
+      &:after{
+    background: none;
+    }
+}
+////////////////////////////////////
+.blue-box[data-page$="-calender"]{
+     @include to-color($yellow,$yellow,$blue);
+     @include calender($yellow,'blue');
+}
+.green-box[data-page$="-calender"]{
+     @include to-color($purple,$purple,$fg);
+     @include calender($purple,'green');
+}
+
+.branch_calender{
+      @include calender($purple,'green');
+}
+

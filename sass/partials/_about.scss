@@ -1,0 +1,32 @@
+div[data-page="about"]{
+    .content-block{
+        text-align: center;
+        img{
+            margin-bottom: 25px;
+        }
+        p{
+            text-align: $left;
+            color: $fg;
+            margin-bottom: 15px;
+        }
+ }
+}
+
+#aboutbox{
+    background: rgba($fg,.3);
+    padding: 15px;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 3px;
+    p{
+        text-align: center;
+        letter-spacing: 1px;
+        font-size: 14px;
+        font-weight: normal;
+        strong{
+            font-weight: normal;
+            font-size: 14px;
+        }
+    }
+}

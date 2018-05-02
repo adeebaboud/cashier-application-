@@ -1,0 +1,53 @@
+@mixin time($color,$h1color,$h3color,$svg){
+    header {
+        text-align: center;
+        margin-bottom: -50px;
+        position: relative;
+        z-index: 2;
+        span {
+            border-radius: 100%;
+            display:inline-block;
+            @include square(150px);
+            padding: 0;
+            box-sizing: border-box;
+            background-color: $color;
+            text-align: center;
+        }
+    }
+    .card {
+        text-align: center;
+        border-radius: 15px;
+        .card-content-inner {
+            padding: 40px;
+            h3 {
+                margin-top: 30px;
+                color: $h3color;
+                font-weight: normal;
+            }
+            h1 {
+                color: $h1color;
+                span {}
+            }
+        }
+    }
+    .button{
+        width: 50%;
+        margin: auto;
+        &.button-fill{
+            background-color:$h1color;
+        }
+    }
+}
+
+
+.yellow-box[data-page$="-time"]{
+        @include time($yellow,$red,$dark-grey,"yellow");
+    }
+
+.blue-box[data-page$="-time"]{
+        @include time($blue,$yellow,$dark-grey,"blue");
+    }
+
+.green-box[data-page$="-time"]{
+        @include time($green,$purple,$dark-grey,"green");
+    }

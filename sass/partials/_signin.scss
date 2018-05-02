@@ -1,0 +1,46 @@
+.signin_form{
+    width: 90%;
+    .item-input{
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-radius: 25px;
+            background-color: $fg;
+            background-size: 25px;
+            background-repeat: no-repeat;
+            background-position: #{if-ltr('94%','6%')} 50%;
+                &.input-password{
+                     background-image: url('#{$img-src}icons/icon-password.svg') ;
+                }
+                &.input-name{
+                     background-image: url('#{$img-src}icons/icon-name.svg') ;
+                }
+            .input{
+                border-radius: 25px;
+                padding-#{$left}: 15px;
+                background-color:transparent;
+                height: 54px;
+            }
+        }
+        .list-block {
+             margin: 0;
+            ul{
+            background: transparent;
+            border: none;
+            &:before, &:after{
+                background: transparent;
+            }
+            }
+    }
+    button[type="submit"]{
+        height: 55px;
+    }
+}
+.buttons-row {
+    .button{
+            height: 55px;
+           line-height: 58px;
+        &:first-child{
+            border-#{$left}: none;
+        }
+    }
+}

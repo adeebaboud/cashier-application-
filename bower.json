@@ -1,0 +1,32 @@
+{
+  "name": "shawermatacCashier",
+  "version": "0.1.0",
+  "authors": [
+    "das-360"
+  ],
+  "description": "shawermatac app description",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "css",
+    "html"
+  ],
+  "main": [
+    "assets/css/style-ltr.css",
+    "assets/js/scripts.js"
+  ],
+  "license": "cc",
+  "homepage": "http://localhost/shawermatac/",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  },
+  "devDependencies": {}
+}

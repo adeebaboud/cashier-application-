@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.das360.cashier" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <feature name="Whitelist">
+        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="NetworkStatus">
+        <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
+    </feature>
+    <feature name="SplashScreen">
+        <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="PushNotification">
+        <param name="android-package" value="com.adobe.phonegap.push.PushPlugin" />
+    </feature>
+    <name>cashir</name>
+    <description>
+      shawermatec cashier App
+    </description>
+    <author email="dev@das-360.net" href="http://das-360.net">
+        das-360 Team
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <access launch-external="yes" origin="tel:*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <allow-intent href="market:*" />
+    <icon density="ldpi" src="www/res/icons/android/icon-36-ldpi.png" />
+    <icon density="mdpi" src="www/res/icons/android/icon-48-mdpi.png" />
+    <icon density="hdpi" src="www/res/icons/android/icon-72-hdpi.png" />
+    <icon density="xhdpi" src="www/res/icons/android/icon-96-xhdpi.png" />
+    <splash density="port-hdpi" src="www/res/screens/android/screen-hdpi-portrait.png" />
+    <splash density="port-ldpi" src="www/res/screens/android/screen-ldpi-portrait.png" />
+    <splash density="port-mdpi" src="www/res/screens/android/screen-mdpi-portrait.png" />
+    <splash density="port-xhdpi" src="www/res/screens/android/screen-xhdpi-portrait.png" />
+    <splash density="land-hdpi" src="www/res/screens/android/screen-hdpi-landscape.png" />
+    <splash density="land-ldpi" src="www/res/screens/android/screen-ldpi-landscape.png" />
+    <splash density="land-mdpi" src="www/res/screens/android/screen-mdpi-landscape.png" />
+    <splash density="land-xhdpi" src="www/res/screens/android/screen-xhdpi-landscape.png" />
+    <preference name="loglevel" value="DEBUG" />
+    <preference name="SplashScreen" value="screen" />
+    <preference name="AutoHideSplashScreen" value="false" />
+</widget>

@@ -1,0 +1,320 @@
+.order_page{
+    color: $bg;
+    .data-date{
+        strong{
+            color: $blue;
+        }
+        h3{
+            color: $dark-grey;
+            width: 80%;
+        }
+    }
+    .order{
+        position: relative;
+        width: 100%;
+        display: inline-block;
+        text-align: $right;
+        min-height: auto;
+        h4,h3{
+            color: $blue;
+        }
+        p{
+            font-size: 12px;
+            width: 80%;
+        }
+    }
+    .card{
+        box-shadow: none;
+        &:after{
+            @include pos(absolute,top $right,0);
+            content: '';
+            @include square(75px);
+        }
+        &[data-order="home"]{
+            &:after{
+                  background: url('#{$img_src}backgrounds/order-home.svg') 0 0 no-repeat;
+            }
+        }
+        &[data-order="car"]{
+             &:after{
+                  background: url('#{$img_src}backgrounds/order-car.svg') 0 0 no-repeat;
+            }
+        }
+        &[data-order="branch"]{
+             &:after{
+                  background: url('#{$img_src}backgrounds/order-branch.svg') 0 0 no-repeat;
+            }
+        }
+    }
+}
+.ordercard{
+    .card-header{
+	    color: black;
+        padding: 0;
+        min-height: auto;
+        text-transform: capitalize;
+        span{
+            border-bottom: 1px solid $red;
+            padding: 5px;
+            width: 50px;
+            font-weight: bold;
+        }
+    }
+    .card-content{
+        .card-content-inner{
+			color:black;
+            padding: 5px;
+			text-align:$left;
+            h2{
+                background: darken($fg,10%);
+                padding:5px 2px;
+                text-transform: capitalize;
+                span{
+                    color: $dark-grey;
+                    margin-#{$left}: 15px;
+                    margin-#{$right}: 5px;
+                    float: $right;
+                    a{
+                        color: $green;
+                    }
+                }
+            }
+            .order_date{
+                h4{
+                        margin-bottom: 5px;
+                }
+                span{
+                    color: $dark-grey;
+                    background: darken($fg,10%);
+                    text-align: $right;
+                    display: inline-block;
+                    padding: 5px 5px 5px 0;
+                    width: 100%;
+                    font-weight: bold;
+                    margin: auto;
+                    b{
+                        float: $left;
+                        color: $bg;
+                        margin-left: 2px;
+                    }
+                }
+                }
+            h3{
+                background: darken($fg,10%);
+                padding:5px 2px;
+                text-transform: capitalize;
+                span{
+                    color: $red;
+                    float: $right;
+                    margin-#{$right}: 5px;
+                }
+            }
+        }
+    }
+    .card-footer{
+        min-height: auto;
+        margin: 0;
+        padding: 5px;
+        a{
+              padding: 5px 12px;
+            &.link-gotit{
+                background: $green;
+                color: $fg;
+
+                &.active-state{
+                    background:darken($green,5%);
+                }
+            }
+            &.link-more{
+                background: $blue;
+                color: $fg;
+                  &.active-state{
+                      background:darken($blue,5%);
+                }
+            }
+        }
+
+        span{
+			position: relative;
+			text-transform: capitalize;
+			font-weight: bolder;
+			padding:  2px 3px;
+
+            &[data-status="waiting"] {
+                    color: $facebook;
+                    border: 1px solid  darken($facebook,5%);
+
+            }
+            &[data-status="cancelled"] {
+                    color: darken($red,5%);
+                    border: 1px solid  darken($red,5%);
+
+            }
+             &[data-status="ready"]{
+                    color: darken($rss,5%);
+                    border: 1px solid  darken($rss,5%);
+
+            }
+             &[data-status="delivered"]{
+                    color: darken($green,5%);
+                    border: 1px solid  darken($green,5%);
+            }
+            &[data-status="received"]{
+                color: darken(#00FF00,5%);
+                border: 1px solid  darken(#00FF00,5%);
+            }
+        }
+    }
+}
+
+
+.orderinfo-list{
+    ul{
+        background: rgba($fg,.8);
+        &:after,&:before{
+         background: transparent;
+        }
+        .item-inner{
+
+            .item-title{
+                color: $bg;
+            }
+            .item-after{
+                color: $bg;
+				a{
+					color:$blue;
+				}
+            }
+        }
+    }
+}
+
+.order_items ul{
+    background: rgba($fg,.8);
+        &:after,&:before{
+         background: transparent;
+        }
+    .item-title{
+        color: $bg;
+        font-size: 17px;
+    }
+    .item-after{
+        font-size: 14px;
+        padding: 4px;
+        border-bottom: 1px solid $grey;
+        color: $red;
+    }
+    .item-subtitle{
+        color: $bg;
+        margin-top: 10px;
+        strong {
+            font-size: 14px;
+            font-weight: bold;
+            color: $blue;
+        }
+    }
+}
+.item-note{
+    width: 94%;
+    .item-note-title{
+         color: $bg;
+        margin-top: 5px;
+    }
+    .item-note-content{
+         color: $bg;
+        p{
+            width: 100%;
+            margin: 0 3%;
+            padding: 5px;
+            margin-bottom: 15px;
+            line-height: 23px;
+        }
+    }
+}
+.popup-details{
+    .navbar-inner{
+        background: $blue;
+    }
+    .page-content{
+        background: #e3e3e3;
+    }
+    .list-block{
+        margin-top: 52px;
+    }
+}
+.order-toolbar{
+	background:#962430;
+	.buttons-row{
+		width: 100%;
+		margin: 0;
+        height: 100%;
+		.button{
+			height:100%;
+			line-height: 45px;
+		}
+		.active{
+			&.btn-ready{
+				background:#4CAF50;
+			}&.btn-canceled{
+				background:#ff3b30;
+			}&.btn-delivered{
+				background:#007aff;
+			}
+		}
+	}
+}
+.order-details-status{
+    text-transform: capitalize;
+    &[data-status="waiting"] {
+                    color: $facebook;
+            }
+            &[data-status="canceled"] {
+                    color: darken($red,5%);
+            }
+             &[data-status="ready"]{
+                    color: darken($rss,5%);
+            }
+             &[data-status="delivered"]{
+                    color: darken($green,5%);
+            }
+    &[data-status="received"]{
+        color: darken(#00FF00,5%);
+    }
+}
+.options{
+    h6{
+        margin: 5px 0;
+        color: $red;
+    }
+    span{
+        color: $bg;
+        background: darken($fg,8%);
+        position: relative;
+        margin: 2px 1px;
+        padding:0 4px 0 0;
+        display: inline-block;
+        border: 1px solid darken($fg,15%);
+        border-radius: 4px;
+        &:after{
+            position: absolute;
+            content: '';
+            color: $blue;
+            margin: 0 2px;
+        }
+        small{
+            padding:1px 3px;
+            &.green{
+                background: green;
+                color:$fg;
+                border: 1px solid green;
+                border-radius: 4px 0 0 4px;
+            }
+            &.red{
+               background: red;
+               color: $fg;
+               border: 1px solid red;
+               border-radius: 4px 0 0 4px;
+            }
+        }
+    }
+}

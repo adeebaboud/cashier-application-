@@ -1,0 +1,135 @@
+.brunchespage{
+    ul{
+        background:rgba($green ,.7);
+        &:after,&:before{
+            background-color: transparent;
+        }
+        li.swipeout{
+            border-bottom: 1px solid darken($green,5%);
+            .item-inner{
+                   display: inline-block;
+                    width: 73.5%;
+                padding-#{$left}:10px ;
+                &:after{
+                    background: transparent;
+                }
+            }
+            .item-content{
+                width: 100%;
+               // display: block;
+                .item-image{
+                    width: 25%;
+                    display: inline-block;
+                    span{
+                        margin-top: 0;
+                       background: rgba( $purple ,.5);
+                       border-radius: 100%;
+                        height: 70px;
+                        width: 70px;
+                       display: -webkit-box;
+                       display: -webkit-flex;
+                       display: -ms-flexbox;
+                       display: flex;
+                      -webkit-box-pack: center;
+                      -webkit-justify-content: center;
+                          -ms-flex-pack: center;
+                              justify-content: center;
+                      -webkit-box-align: center;
+                      -webkit-align-items: center;
+                          -ms-flex-align: center;
+                              align-items: center;
+                        img{
+                            width: 25px;
+                        }
+                        &.icon-jeddah{
+                             background: rgba( $fg ,.4);
+                        }
+                        &.icon-taif{
+                            background: rgba( $snapchat ,.4);
+                        }
+                        &.icon-Makah{
+                            background: rgba( lighten($blue,15%) ,.4);
+                        }
+                    }
+
+                }
+                .item-inner{
+                    .itemtitle{
+                        display: block;
+                        h4{
+                            margin-bottom: 0;
+                            margin-top: 0;
+                            color: $fg;
+                            font-size: 16px;
+                        }
+                        span{}
+                    }
+                    .item_subtitle{
+                        display: block;
+                        color: darken($dark-grey,10%);
+                        margin-bottom: 10px;
+                        i{}
+                    }
+                    .item_text{
+                        display: block;
+                        i{
+                            margin: 0 5px;
+                            opacity: .5;
+                        }
+                        span{
+                            display:  block;
+                            color: $bg;
+                        }
+                    }
+                }
+            }
+            .swipeout-actions-right{
+                a{
+                     background-color: lighten($bg,15%);
+                    img{
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+.openMap{
+    a{
+        padding: 5px 0;
+        display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+        img{
+            width: 35px;
+        }
+        span{
+            color: $bg;
+        }
+        &.active-state{
+            background: darken($fg ,15%);
+        }
+    }
+}
+
+/*
+a.	Chicken
+b.	Beef
+c.	Falafel
+d.	Side order
+e.	Dessert
+f.	Drink
+
+*/
+
+

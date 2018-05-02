@@ -1,0 +1,228 @@
+.profile{
+     border-radius: 15px;
+        padding: 15px;
+
+    .user_img{
+        display: block;
+        text-align: center;
+        span{
+            display: inline-block;
+            width: 150px;
+            height: 150px;
+            background: $dark-grey;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-top: -90px;
+
+        img{
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+        }
+      }
+    }
+
+    header{
+        text-align: center;
+        margin-bottom: 25px;
+        display: block;
+        margin-top: 20px;
+        color: $dark-grey;
+        position: relative;
+        h1{
+            font-size: 2em;
+        }
+        input{
+            position: absolute;
+            top: 6px;
+            #{$left}: 5%;
+            width: 90%;
+            height: 34px;
+            background: darken($fg,15%)!important;
+                border: none;
+            text-align: center;
+        }
+    }
+    .list-block{
+        margin-top: 0;
+    }
+    ul{
+        li{
+            width: 100%;
+            display: table;
+            margin-bottom: 10px;
+            span{
+                display: table-cell;
+                min-height: 30px;
+                vertical-align: middle;
+                padding-#{$left}: 10px;
+                color: $dark-grey;
+                text-transform: capitalize;
+                img{
+                    width: 32px;
+                    height: 32px;
+                    margin-top: 5px;
+                    margin-#{$left}: 25px;
+                }
+                input.editable{
+                    border-bottom: 1px solid darken($fg,25%)!important;
+                        height: 36px;
+                }
+            }
+        }
+    }
+}
+.btn-floating{
+    text-align: center;
+.button-floating{
+    background: $yellow;
+    display: inline-block;
+    @include square(100px);
+    box-sizing: border-box;
+    text-align: center;
+    margin: 15px auto;
+    border-radius: 100%;
+    box-shadow:2px 2px 0 0 rgba($bg,.4);
+    img{
+        @include square(35px);
+        margin-top: 33px;
+        &:last-child{
+            display: none;
+        }
+    }
+    &.active-state{
+        background: darken($yellow,15%);
+    }
+    &.editable{
+
+        img{
+        &:first-child{
+            display: none;
+        }
+        &:last-child{
+            display: inline-block;
+        }
+    }
+    }
+}
+    }
+
+
+
+//
+//.profile_avater{
+//     display: block;
+//     width: 100%;
+//     text-align: center;
+//     position: relative;
+//     margin-top: -100px;
+//    .image{
+//        position: relative;
+//        display: inline-block;
+//        @include square(200px);
+//        border-radius: 50%;
+//        background: $grey url('#{$img_src}icons/icon-user-01.png') center center no-repeat;
+//        margin: auto;
+//        box-sizing: border-box;
+//        overflow: hidden;
+//        box-shadow: 0 0 0 5px darken($fg,15%);
+//        img{
+//            @include square(100%);
+//            border-radius: 50%;
+//            @include pos(absolute,top left,0);
+//            z-index: 0;
+//        }
+//        .mask{
+//            @include square(100%);
+//            @include pos(absolute,top left,0);
+//            background: rgba($fg,.5) url('#{$img_src}/icons/icon_upload.png') center center no-repeat;
+//            background-size: 50% 50%;
+//            border-radius: 50%;
+//            display: none;
+//            z-index: 1;
+//        }
+//            input[type="file"]{
+//            position: absolute;
+//            top: 0;
+//            left: 0;
+//            z-index: 1;
+//            width: 100%;
+//            height: 100%;
+//            opacity: 0;
+//            z-index:2;
+//        }
+//
+//    }
+//}
+//
+//$bg-user-image :url('#{$img_src}bg-user-img.png');
+//$bg-camera-orange : url('#{$img_src}icon-camera-orange.png');
+//.header-profile {
+//    @include fcenter;
+//    margin-top: -50px;
+//
+//    span {
+//        display: inline-block;
+//        @include square(150px);
+//        background: $grey $bg-camera-orange center no-repeat;
+//        background-size: 40%;
+//        border-radius: 50%;
+//        overflow: hidden;
+//        box-shadow: 0 0 0 8px $grey;
+//        text-align: center;
+//        img {
+//            max-width: 150px;
+//            min-height: 150px;
+//        }
+//    }
+//    input{
+//        display: none;
+//    }
+//}
+//.takePicture{
+//    a{
+//        img{
+//            width: 35%;
+//            margin: 5px;
+//        }
+//    }
+//}
+//.modal{
+//    .modal-button{
+//        color: $dark-grey;
+//    }
+//}
+//
+
+.toolbar{
+    .current-year-value,.current-month-value{
+        color: $bg;
+    }
+}
+
+
+.edit-profile{
+    position: absolute;
+    #{$right}: 15px;
+    z-index: 1000;
+}
+
+
+.btns-edit{
+    i{
+        margin-top: -5px;
+    }
+    .btn-submit{
+        background: $green;
+        &.active-state{
+            background: darken($green,15%);
+        }
+    }
+
+    .btn-close{
+        background: $red;
+        &.active-state{
+             background: darken($red,15%);
+        }
+    }
+}

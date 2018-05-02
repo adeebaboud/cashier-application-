@@ -1,0 +1,34 @@
+.offer-details{
+    .offerImg{
+        width: 100%;
+        height: auto;
+        min-width: 100%;
+        display: block;
+        //background: rgba($fg,.82);
+    }
+    .content-block{
+        //background: rgba($fg,.82);
+        padding-top: 15px;
+        padding-bottom: 25px;
+        margin-top: 0;
+    }
+}
+.offerTitle{
+    color: $red;
+    font-size: 2rem;
+}
+.offerDescription{
+    color: $bg;
+    p{
+         color: $bg;
+    }
+}
+.btn-incart{
+    background-color: $yellow;
+    margin-top: 25px;
+    border: none;
+    color: $bg;
+    &.active-state{
+        background:darken($yellow,15%) ;
+    }
+}

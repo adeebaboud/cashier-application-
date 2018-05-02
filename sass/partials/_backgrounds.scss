@@ -1,0 +1,151 @@
+$colors-bg :(
+    red:#D63647,
+    purple:#934F9F,
+    green: #44B763,
+    blue:#1A93C0,
+    yellow:#F1C418
+);
+@function color-bg($color) {
+  @if map-has-key($colors-bg, $color) {
+    @return map-get($colors-bg, $color);
+  }
+  @return null;
+}
+@mixin page-bg($color){
+    background-color: color-bg($color);
+    background-repeat: no-repeat;
+    background-position:0 0;
+    background-size:cover;
+    @media screen and (max-width:320px) and (orientation: portrait){
+        background-image: url('#{$img_src}backgrounds/#{$color}/screen-ldpi-portrait.png');
+    }
+    @media screen and (min-width:320px) and (orientation: landscape){
+        background-image: url('#{$img_src}backgrounds/#{$color}/screen-ldpi-landscape.png');
+    }
+    @media screen and (min-width: 321px) and (orientation: portrait){
+         background-image: url('#{$img_src}backgrounds/#{$color}/screen-mdpi-portrait.png');
+    }
+    @media screen and (max-width: 480px) and (orientation: landscape){
+         background-image: url('#{$img_src}backgrounds/#{$color}/screen-mdpi-landscape.png');
+    }
+    @media screen and (min-width: 481px) and (orientation: portrait){
+         background-image: url('#{$img_src}backgrounds/#{$color}/screen-hdpi-portrait.png');
+    }
+    @media screen and (min-width: 481px) and (orientation: landscape){
+         background-image: url('#{$img_src}backgrounds/#{$color}/screen-hdpi-landscape.png');
+    }
+    @media screen and (min-width: 801px) and (orientation: portrait){
+         background-image: url('#{$img_src}backgrounds/#{$color}/screen-xhdpi-portrait.png');
+    }
+    @media screen and (min-width: 801px) and (orientation: landscape){
+         background-image: url('#{$img_src}backgrounds/#{$color}/screen-xhdpi-landscape.png');
+    }
+}
+//-------------------------------------------
+.y-bg{
+        background-color: $yellow !important;
+}
+.r-bg{
+    background-color: $red !important;
+}
+.b-bg{
+    background-color: $blue !important;
+}
+.g-bg{
+    background-color: $green !important;
+}
+.p-bg{
+    background-color: $purple !important;
+}
+//-------------------------------------------
+.navbar-inner[data-color="red"]{
+    background-color: $red;
+}
+.navbar-inner[data-color="purple"]{
+     background-color: $purple;
+}
+.navbar-inner[data-color="blue"]{
+ background-color: $blue;
+}
+.navbar-inner[data-color="green"]{
+    background-color: $green;
+}
+.navbar-inner[data-color="yellow"]{
+   background-color: $yellow;
+}
+
+//-------------------------------------------
+div[data-page="index"],
+div[data-page="about"],
+div[data-page="getorder"],
+div[data-page="home"],
+div[data-page="profile"]
+{
+//        @include page-bg("red");
+      background: url('#{$img_src}backgrounds/red.svg') 0 0 no-repeat;
+      background-size: cover;
+}
+div[data-page="offer-item"]{
+    background: lighten($grey,33%);
+}
+div[data-page="places"],
+div[data-page="signup"],
+div[data-page="form-page"]{
+    @include page-bg("purple");
+}
+div[data-page="myorders"],
+div[data-page="to-car-calender"],
+div[data-page="to-car-place"],
+div[data-page="d-t-c-time"]
+{
+      @include page-bg("blue");
+}
+div[data-page="signin"],
+div[data-page="our-brunches"],
+div[data-page="d-t-b-time"],
+div[data-page="to-branch-place"],
+div[data-page="to-branch-calender"]
+{
+     @include page-bg("green");
+}
+div[data-page="home-address"],
+div[data-page="d-t-h-time"],
+div[data-page="home-place"]{
+    @include page-bg("yellow");
+}
+
+div[data-page="cart"]{
+     background-color: $purple;
+    .page-content {
+	background: $fg;
+}
+}
+div[data-page="signup-form"]{
+    &.fs1{
+            @include page-bg("blue");
+    }
+     &.fs2{
+            @include page-bg("yellow");
+    }
+     &.fs3{
+            @include page-bg("green");
+    }
+    &.fs4{
+            @include page-bg("red");
+    }
+}
+div[data-page="signup-form_A"]{
+      @include page-bg("blue");
+}
+div[data-page="signup-form_B"]{
+    @include page-bg("yellow");
+}
+div[data-page="signup-form_C"]{
+     @include page-bg("green");
+}
+div[data-page="message"]{
+    background-color: $dark-grey;
+    .navbar-messages{
+        background-color: $dark-grey;
+    }
+}

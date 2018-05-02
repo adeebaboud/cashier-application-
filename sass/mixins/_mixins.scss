@@ -1,0 +1,681 @@
+//out:false
+//
+//@import "../partials/media-queries";
+//@import "../functions/functions";
+///**
+//*-----------------------------------------
+//* fontface mixin
+//*-----------------------------------------
+//*/
+@mixin fontface($fontname,$fontsource){
+    @font-face {
+    font-family: $fontname;
+    src:        url('#{$fontsource}');
+    }
+ //EX :  @include fontface(font name,"font Source");
+}
+///**
+//*-----------------------------------------
+//* font size mixin
+//*-----------------------------------------
+//*/
+
+  @mixin fsize($size){
+     $line-height-base: 1.428571429; // 20/14 from bootstrap
+     $line-height: floor(($size * $line-height-base));
+    font-size: $size;
+    line-height:  #{$line-height};
+// EX : body{@include fsize(14em); }
+
+}
+
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+@mixin fontsize($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+    //EX : @include fontsize(14px)
+}
+@mixin fcenter(){
+    display: -webkit-box;
+   display: -webkit-flex;
+   display: -ms-flexbox;
+   display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+///**
+//*-----------------------------------------
+//* clearfix mixin
+//*-----------------------------------------
+//*/
+@mixin clearfix($extend: true) {
+  @if $extend {
+    @extend %clearfix;
+  } @else {
+    &:after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+  }
+}
+%clearfix {
+  @include clearfix($extend: false);
+}
+
+//**
+//*-----------------------------------------
+//* direction mixin
+//*-----------------------------------------
+//*/
+@mixin if-ltr {
+  @if $dir != rtl {
+    @content;
+  }
+}
+@mixin if-rtl {
+  @if $dir == rtl {
+    @content;
+  }
+}
+//*-----------------------------------------
+//* user-select mixin
+//*-----------------------------------------
+@mixin user-select($select:none){
+     -webkit-user-select: $select;
+  -moz-user-select: $select;
+  user-select: $select;
+}
+///**
+//*-----------------------------------------
+//* font family mixin
+//*-----------------------------------------
+//*/
+
+@mixin fa($content){
+   $slash: "\"\\#{$content}\"";
+   font-family: 'FontAwesome';
+   content: unquote($slash);
+    //EX : body{@include fa(f080);}
+}
+///**
+//*-----------------------------------------
+//* direction mixin
+//*-----------------------------------------
+//*/
+@mixin  dir($dir:null){
+    @if $dir == null{
+         direction: ltr;
+    }else{
+        direction: $dir;
+    }
+//EX : body{@include dir(rtl);}
+}
+///**
+//*-----------------------------------------
+//* padding margin position mixin
+//*-----------------------------------------
+//*/
+@mixin pmp($type,$key,$v-1:null,$v-2:null,$v-3:null,$v-4:null,$v-5:null,$v-6:null,$v-7:null,$v-8:null){
+    @if type-of($key) == string {
+          #{$type} : unquote($key);
+        //EX : body{@include pmp(margin , "1px 15px" );}
+    } @else if $type == padding or $type == margin{
+      @if $key == 1{
+      #{$type}-#{$v-1} : $v-2;
+        //EX :  body{@include pmp(padding ,1,top,5px);}
+    } @else if $key == 2{
+      #{$type}-#{$v-1} : $v-3;
+      #{$type}-#{$v-2} : $v-4;
+        //EX :  body{@include pmp(padding ,2,top,left,5px,10px);}
+    } @else if $key == 3{
+      #{$type}-#{$v-1} : $v-4;
+      #{$type}-#{$v-2} : $v-5;
+      #{$type}-#{$v-3} : $v-6;
+        //EX :  body{@include pmp(padding ,3,top,left,bottom,5px,10px,6px);}
+    } @else if $key == 4{
+      #{$type}-top    : $v-1;
+      #{$type}-right  : $v-2;
+      #{$type}-bottom : $v-3;
+      #{$type}-left   : $v-4;
+        //EX :  body{@include pmp(padding ,4,5px,10px,6px,0px);}
+    }
+    } @else {
+      @if $key == 1 {
+        position:$type;
+        #{$v-1} : $v-2;
+          //EX : body{@include pmp(fixed ,1,top,5px);}
+      }@else if $key == 2 {
+        position:$type;
+        #{$v-1} : $v-3;
+        #{$v-2} : $v-4;
+          //EX : body{@include pmp(relative ,2,top,left,5px,10px);}
+      }@else if $key == 3 {
+        position:$type;
+        #{$v-1} : $v-4;
+        #{$v-2} : $v-5;
+        #{$v-3} : $v-6;
+          //EX : body{@include pmp(inherit ,3,top,left,bottom,5px,10px,6px);}
+      }@else if $key == 4 {
+       position:$type;
+          top    : $v-1;
+          right  : $v-2;
+          bottom : $v-3;
+          left   : $v-4;
+          //EX :  body{@include pmp(static ,4,5px,10px,6px,0px);}
+      }
+    }
+}
+
+//*-----------------------------------------
+//* position mixin
+//*-----------------------------------------
+@function child($value,$x){
+  $i: length($value);
+    @while $i < $x {
+         @return  $x - $i;
+    }
+}
+@mixin pos($position,$directions,$value){
+  position : $position;
+  @for $i  from 1 through length($directions){
+      #{nth($directions,$i)}:if(length($value)<$i, nth($value,child($value,$i)), nth($value,$i));
+    }
+}
+// EX :
+// body{@include pos (absolute ,top  right bottom left, 25px 20px 30px);}
+
+
+///**
+//*-----------------------------------------
+//* size mixin
+//*-----------------------------------------
+//*/
+
+@mixin size( $width,$height) {
+  width:  $width;
+  height: $height;
+    // EX :body{@include size(15px,50px);}
+}
+@mixin square($size) {
+  @include size($size, $size);
+ // EX  : body{@include square(15px);}
+}
+///**
+//*-----------------------------------------
+//* placeholder mixin
+//*-----------------------------------------
+//*/
+
+ @mixin placeholder($color ,$color2:red) {
+  &:-moz-placeholder {
+    color: $color;
+  }
+  &:-ms-input-placeholder {
+    color: $color;
+  }
+  &::-webkit-input-placeholder {
+    color: $color;
+  }
+  &.required{
+     &:-moz-placeholder {
+    &:after{
+       content: "*"; color: $color2;
+    }
+  }
+  &:-ms-input-placeholder {
+    &:after{
+       content: "*"; color: $color2;
+    }
+  }
+  &::-webkit-input-placeholder {
+    &:after{
+       content: "*"; color: $color2;
+    }
+  }
+  }
+   //EX :   .form-control{ @include placeholder(#f00,#000);}
+    //EX : .form-control{ @include placeholder(#f00);}
+}
+
+
+
+
+///**
+//*-----------------------------------------
+//* display flex mixin
+//*-----------------------------------------
+//*/
+//align-items: flex-start | flex-end | center | baseline | stretch
+@mixin flex-center($value:flex,$horizontal:center,$vertical:center,$wrap:wrap){
+     display: $value;
+     justify-content: $horizontal; //align horizontal
+     align-items: $vertical; // align vertical
+     flex-wrap: $wrap;
+     // Ex : body{@include flex-center();}
+}
+
+@mixin flexbox($inline : null) {
+  @if $inline == inline{
+  display: -webkit-inline-box;
+	display: -webkit-inline-flex;
+	display: -moz-inline-flex;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+  } @else {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flexbox;
+	display: flex;
+  }
+    //EX @include flexbox(inline);
+    //EX @include flexbox;
+}
+
+@mixin flexflow($direction:null,$wrap:null){
+  -webkit-flex-flow: $direction $wrap;
+	-moz-flex-flow: $direction $wrap;
+	-ms-flex-flow: $direction $wrap;
+	flex-flow: $direction $wrap;
+    //EX @include flexflow(row wrap);
+}
+
+@mixin alignitems($horizontal:null,$vertical:null){
+  -webkit-justify-content: $horizontal;
+	-moz-justify-content: $horizontal;
+	-ms-flex-justify-content: $horizontal;
+	 justify-content: $horizontal;
+	  -webkit-box-align-content: $vertical;
+    -webkit-align-content: $vertical;
+    -moz-align-content: $vertical;
+    -ms-flex-align-content: $vertical;
+    align-content: $vertical;
+    // EX  @include alignitems(center,center);
+}
+///**
+//*-----------------------------------------
+//* backface mixin
+//*-----------------------------------------
+//*/
+
+// hidden--visible
+@mixin bface($value:visible){
+    -webkit-backface-visibility: $value;
+    backface-visibility: $value;
+    // EX : body{@include bface(hidden);}
+}
+///**
+//*-----------------------------------------
+//* background-clip mixin
+//*-----------------------------------------
+//*/
+
+ @mixin bg_clip($key:null){
+  @if $key == b{
+    background-clip: border-box;
+  }@else if $key == p{
+    background-clip: padding-box;
+  }@else if $key == c{
+  background-clip: content-box;
+  }
+  //Ex :  body{@include bg_clip(c);}
+  }
+
+///**
+//*-----------------------------------------
+//* box-shadow mixin
+//*-----------------------------------------
+//*/
+@mixin box_shadow($shadows...) {
+  -moz-box-shadow: $shadows;
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+    //EX : .shadows {@include box_shadow(0px 4px 5px #666, 2px 6px 10px #999);}
+}
+///**
+//*-----------------------------------------
+//* text shadow mixin
+//*-----------------------------------------
+//*/
+@mixin text-shadow ($string...) {
+    text-shadow: $string;
+}
+
+///**
+//*-----------------------------------------
+//* border mixin
+//*-----------------------------------------
+//*/
+ @mixin  bd($key,$v0:null,$v1:null,$v2:null,$v3:null,$v4:null,$v5:null){
+   @if $key == 0 {
+    border:$v0;
+    //Ex : body{@include bd(0,1px solid #000)}
+   } @else if $key == 1{
+      border-#{$v0}:$v1;
+      //Ex :body{@include bd(1,top,1px solid #000)}
+   } @else if $key == 2{
+     border-#{$v0}:$v2;
+     border-#{$v1}:$v3;
+     //EX : body{@include bd(2,top,left,1px solid #000,1px solid #f00)}
+   }
+   @else if $key == 3{
+     border-#{$v0}:$v3;
+     border-#{$v1}:$v4;
+     border-#{$v2}:$v5;
+     //Ex : body{@include bd(3,top,left,bottom,1px solid #000,1px solid #f00,1px solid #00f)}
+   }
+}
+///**
+//*-----------------------------------------
+//* border-radius mixin
+//*-----------------------------------------
+//*/
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+    //EX .box { @include border-radius(10px); }
+}
+///**
+//*-----------------------------------------
+//* respon mixin
+//*-----------------------------------------
+//*/
+@mixin respon($col,$span,$span1,$full-width,$g-width,$float) {
+$column-width:$full-width / $col;
+$gutter-width: $g-width;
+  margin-right: -#{$gutter-width};
+  margin-left: -#{$gutter-width};
+  &:after,&:before{
+     display: table;
+     content: " ";
+  }
+  &:after{
+     clear: both;
+  }
+  div.div_one,div.div_tow{
+  float: $float;
+  position: relative;
+  padding-right: #{$gutter-width};
+  padding-left: #{$gutter-width};
+   box-sizing: border-box;
+  }
+  div.div_one{
+  width: percentage($column-width * $span /$full-width) ;
+  }
+  div.div_tow{
+    width: percentage($column-width * $span1 /$full-width ) ;
+  }
+    // .content { @include respon(12,8,4,1170,10px,right);}
+}
+
+///**
+//*-----------------------------------------
+//* columns mixin
+//*-----------------------------------------
+//*/
+
+@mixin column($count:1,$gap:10px){
+-webkit-column-count:     $count;
+    -moz-column-count:    $count;
+    column-count:         $count;
+    -webkit-column-gap:   $gap;
+    -moz-column-gap:      $gap;
+    column-gap:           $gap;
+    //Ex body{@include column(2,20px);}
+}
+
+@mixin col-rule($arguments...){
+     -webkit-column-rule: $arguments;
+    -moz-column-rule:    $arguments;
+    column-rule:         $arguments;
+    //EX : body{@include col-rule(5px solid #000);}
+    //NOTE @style: none  hidden   dotted  dashed   solid   double   groove  ridge  inset  outset  initial   inherit;
+}
+
+
+///**
+//*-----------------------------------------
+//* keyframes mixin
+//*-----------------------------------------
+//*/
+
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes $animation-name {
+    @content;
+  }
+    @-moz-keyframes #{$animation-name} {
+    @content;
+  }
+    @-ms-keyframes #{$animation-name} {
+    @content;
+  }
+    @-o-keyframes #{$animation-name} {
+    @content;
+  }
+    @keyframes #{$animation-name} {
+    @content;
+  }
+// EX   @include keyframes(slide-down) {
+// EX     0% { opacity: 1; }
+// EX    90% { opacity: 0; }
+//}
+}
+
+///**
+//*-----------------------------------------
+//* animation mixin
+//*-----------------------------------------
+//*/
+@mixin animation($arguments) {
+  -webkit-animation: #{$arguments};
+  -moz-animation: #{$arguments};
+  -ms-animation: #{$arguments};
+  -o-animation: #{$arguments};
+  animation: #{$arguments};
+    //EX :  @include animation(slide-down 5s 3 );
+}
+///**
+//*-----------------------------------------
+//* transition mixin
+//*-----------------------------------------
+//*/
+
+@mixin transitions($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+    //@include transition(color .3s ease);
+}
+@mixin transition($element:All,$time:250ms, $name:ease-in-out){
+      -webkit-transition: $element $time $name;
+      transition:         $element $time $name;
+  //EX : body{@include transition;}
+}
+// /**
+//*-----------------------------------------
+//* box sizing mixin
+//*-----------------------------------------
+//*/
+@mixin box-sizing ($type: border-box) {
+    -webkit-box-sizing: $type;
+    -moz-box-sizing:    $type;
+    -ms-box-sizing: $type;
+    -o-box-sizing: $type;
+     box-sizing:   $type;
+}
+
+///**
+//*-----------------------------------------
+//* delay mixin
+//*-----------------------------------------
+//*/
+
+@mixin delay($time){
+    -webkit-animation-delay: $time;
+    animation-delay: $time;
+    // EX body{@include delay(15ms);}
+}
+
+///**
+//*-----------------------------------------
+//* transform mixin
+//*-----------------------------------------
+//*/
+@mixin transform($transform...){
+    -webkit-transform:   $transform;
+    -ms-transform:          $transform;
+    -o-transform:          $transform;
+    -moz-transform:          $transform;
+        transform:          $transform;
+    //EX body{@include transform(scale(2,3));}
+}
+
+//*-----------------------------------------
+//*    translat rotate skew    mixins
+//*-----------------------------------------
+ @mixin trans($type:null,$key:null,$degx:null,$degy:null){
+  @if $key == x or $key == y  {
+    $dir:to-upper-case($key);
+    @include transform(unquote("#{$type}#{$dir}(#{$degx})"));
+      // EX body{@include trans(skew,x,-12deg);}
+  } @else if type-of($key) == number or type-of($key) == null{
+       @include transform(unquote("#{$type}(#{$key}#{$degx})"));
+      //EX body{@include trans(rotate,-90deg);}
+  }
+
+}
+
+@mixin origin($origin...){
+     -moz-transform-origin:$origin;
+     -o-transform-origin:$origin;
+     -ms-transform-origin:$origin;
+     -webkit-transform-origin:$origin;
+     transform-origin:$origin;
+}
+
+//*-----------------------------------------
+//* matrix mixin
+//*-----------------------------------------
+@mixin matrix ($rotate: 0.86, $scale: 0.5, $translate: -0.5, $skew: 0.86, $x: 0, $y: 0) {
+    -webkit-transform: matrix($rotate, $scale, $translate, $skew, $x, $y);
+       -moz-transform: matrix($rotate, $scale, $translate, $skew, $x, $y);
+        -ms-transform: matrix($rotate, $scale, $translate, $skew, $x, $y);
+         -o-transform: matrix($rotate, $scale, $translate, $skew, $x, $y);
+            transform: matrix($rotate, $scale, $translate, $skew, $x, $y);
+       //EX  body{@include matrix();}
+  }
+
+
+//*-----------------------------------------
+//* filter mixin
+//*-----------------------------------------
+
+  @mixin filter($filter, $percentage...){
+      @if       $filter == "b"{
+               -webkit-filter: blur($percentage);
+                       filter: blur($percentage);
+          //EX body{@include filter(b,15px);}
+      }@else if $filter == "g"{
+               -webkit-filter: unquote("grayscale(#{$percentage})");
+                       filter: unquote("grayscale(#{$percentage})");
+          //EX body{@include filter(g,1);}
+      }@else if $filter == "sp"{
+               -webkit-filter: sepia($percentage);
+                       filter: sepia($percentage);
+          //EX body{@include filter(sp,1);}
+      }@else if $filter == "s"{
+               -webkit-filter: saturate($percentage);
+                       filter: saturate($percentage);
+          //EX  body{@include filter(s,8);}
+      }@else if $filter == "h"{
+               -webkit-filter: hue-rotate($percentage);
+                       filter: hue-rotate($percentage);
+            //EX  body{@include filter(h,90deg);}
+      }@else if $filter == "i"{
+               -webkit-filter: unquote("invert(#{$percentage})");
+                       filter: unquote("invert(#{$percentage})");
+              //EX body{@include filter(i,.5);}
+      }@else if $filter == "o"{
+               -webkit-filter: unquote("opacity(#{$percentage})");
+                       filter: unquote("opacity(#{$percentage})");
+              //EX body{@include filter(o,.5);}
+      }@else if $filter == "br"{
+               -webkit-filter: brightness($percentage);
+                       filter: brightness($percentage);
+          //EX  body{@include filter(br,4);}
+      }@else if $filter == "c"{
+               -webkit-filter: contrast($percentage);
+                       filter: contrast($percentage);
+      //EX   body{@include filter(c,4);}
+      }@else if $filter == "d"{
+               -webkit-filter: drop-shadow($percentage);
+                       filter: drop-shadow($percentage);
+      // EX   body{@include filter(d,16px 16px 10px rgba(0,0,0,0.9));}
+      }
+  }
+
+
+//*-----------------------------------------
+//* long text-shadow mixin
+//*-----------------------------------------
+
+@mixin longshadow($dir,$color ,$long) {
+  text-shadow:makelongshadow($dir,$color ,$long);
+    //EX : body{@include longshadow(l,#ccc ,2);}
+}
+
+@mixin triangle-bottom($value , $color){
+  border-top:$value solid $color;
+  border-left:$value solid transparent;
+  border-right:$value solid transparent;
+}
+
+
+
+
+
+//*-----------------------------------------
+//* linear-gradient mixin
+//*-----------------------------------------
+@function to-dir($dir) {
+    $count: length($dir);
+    $todir: null;
+    @if $count > 1 {
+        $todir: 'to #{dir(nth($dir,1))} #{dir(nth($dir,2))}';
+    }
+     @if type-of($dir) == number and  unit($dir) == 'deg' {
+        $todir: $dir;
+     }
+    @else {
+        $todir: 'to #{dir($dir)}';
+    }
+    @return #{$todir};
+}
+
+@mixin linear($dir, $startcolor,$endcolor){
+    background-color: nth($startcolor,1);
+    background-image: -webkit-gradient(linear,$dir , $dir , from(0%,$startcolor), to(100% , $endcolor));
+    background-image: -webkit-linear-gradient($dir, $startcolor 0%, $endcolor 100%);
+    background-image:    -moz-linear-gradient($dir, $startcolor 0%, $endcolor 100%);
+    background-image:     -ms-linear-gradient($dir, $startcolor 0%, $endcolor 100%);
+    background-image:      -o-linear-gradient($dir, $startcolor 0%, $endcolor 100%);
+    background-image:         linear-gradient( to-dir($dir), $startcolor 0%, $endcolor 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{nth($startcolor,1)}', endColorstr='#{nth($endcolor,1)}',GradientType=1 );
+}
+ // @include  linear(bottom,#f00,#000);
+ // @include  linear(top left,#f00,#000);

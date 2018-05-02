@@ -1,0 +1,35 @@
+.delivery_form{
+    h3{
+        display: block;
+        text-align: center;
+        color: $red;
+        font-weight: normal;
+    }
+    p{
+        text-align: center;
+    }
+     .item-input{
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-radius: 25px;
+            background-color: $fg;
+            background-size: 25px;
+            background-repeat: no-repeat;
+         background-position: #{if-ltr('94%','6%')} 50%;
+            &.input-country{
+                  background-image: url('#{$img-src}icons/icon-down.svg') ;
+            }
+            .input{
+                border-radius: 25px;
+                padding-#{$left}: 15px;
+                background-color:transparent;
+            }
+        }
+        .list-block ul{
+            background: transparent;
+            border: none;
+            &:before, &:after{
+                background: transparent;
+            }
+        }
+}

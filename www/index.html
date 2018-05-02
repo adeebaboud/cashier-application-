@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>shawermatec cashier</title>
+    <link rel="stylesheet" href="css/framework7.ios.min.css">
+    <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="with-margin" onload="onLoad()">
+    <div class="statusbar-overlay"></div>
+    <div class="panel-overlay with-margin"></div>
+    <!-- Views -->
+    <div class="views">
+        <div class="view view-main">
+            <div class="navbar">
+                <div class="navbar-inner index-nav" data-color="red">
+                     <div class="left">
+                         <img src="img/cashier/logo.png" alt="">
+                     </div>
+                     <div class="center"><span class="app-title">SHAWERMATEC</span></div>
+                    <div class="right">
+                        <a href="#" id="logout" class="link  "  >
+                           <img src="img/icons/icon-logout.svg" alt  = ""  onerror="">
+                       </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="pages  navbar-through">
+                <div data-page="index" class="page">
+                  <div class="list-box">
+                      <ul class="list-btns">
+<!--                       <li><a href="#" data-filter="all" class="filter-btn "><img src="img/cashier/all.svg"  alt=""></a></li>-->
+                          <li><a href="#" data-filter="received" class="filter-btn "><img src="img/cashier/all.svg"  alt=""></a></li>
+                       <li><a href="#" data-filter="waiting" class="filter-btn ">
+                            <span class="badge bg-red noti-badge"></span>
+                       <img src="img/cashier/waiting.svg"  alt=""></a></li>
+                       <li><a href="#" data-filter="ready" class="filter-btn "><img src="img/cashier/ready.svg"   alt=""></a></li>
+                       <li><a href="#" data-filter="delivered" class="filter-btn "><img src="img/cashier/delivered.svg"   alt=""></a></li>
+                       <li><a href="#" data-filter="cancelled" class="filter-btn "><img src="img/cashier/cancelled.svg"   alt=""></a></li>
+
+                      </ul>
+                    </div>
+                    <div class="page-content infinite-scroll  pull-to-refresh-content " data-ptr-distance="60" data-distance="50">
+                       <div class="pull-to-refresh-layer">
+                              <div class="preloader"></div>
+                              <div class="pull-to-refresh-arrow"></div>
+                            </div>
+                        <div class="cards" >
+                            <div class="list-block">
+                                <ul id="myorders">
+
+                                </ul>
+                            </div>
+
+
+                         </div>
+
+						<div class="infinite-scroll-preloader">
+							<div class="preloader"></div>
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+      <script id="ordertemplate" type="text/x-framework7-template">
+
+            <li class="swipeout"  id="or-{{order_id}}">
+              <div class="swipeout-content">
+                <div class="item-inner">
+             <div class="card" data-order="{{or_status_name}}" data-order-id="{{order_id}}" id="order-{{order_id}}">
+            <div class="card-content ordercard">
+                <div class="card-content-inner">
+                    <div class="card-header">Order Num:<span>{{order_number}}</span></div>
+                    <div class="card-content">
+                        <div class="card-content-inner">
+							<h2>Customer : <span>{{first_name}} {{last_name}} {{js "trust(this.customer_trust)"}}</span></h2>
+                        {{#branch}}
+                            <h2>Branch : <span>{{branch_name_en}}</span> </h2>
+                            <h2>phone : <span><a href="tel:{{branch_phone}}" class="link external">{{branch_phone}}</a></span> </h2>
+                        {{/branch}}
+                        {{#address}}
+                            <h2>Address : <span>{{branch_address_en}}</span> </h2>
+                        {{/address}}
+
+                            <h3>Date : <span>{{js "formatDate(this.order_date)"}}</span></h3>
+                            <h3>Total : <span>{{order_total_value}}  SR</span></h3>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span data-status = "{{or_status_name}}">{{or_status_name}}</span>
+                        <a href="#" class="link-more see-order-btn">See Order</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                    </div>
+              </div>
+
+           {{#js_compare "this.or_status_name !== 'waiting'"}}
+              <div class="swipeout-actions-right order-actions">
+
+             <a href="#" class="  btn-ready {{#js_compare "this.or_status_name === 'ready'"}}active{{/js_compare}} " data-status="ready" data-order-id="{{order_id}}">Ready</a>
+ <a href="#" class="  btn-delivered {{#js_compare "this.or_status_name === 'delivered'"}}active{{/js_compare}}
+ {{#js_compare "this.or_status_name === 'waiting'"}}disabled{{/js_compare}}" data-status="delivered" data-order-id="{{order_id}}">Delivered</a>
+ <a href="#" class="  btn-cancelled {{#js_compare "this.or_status_name === 'cancelled'"}}active{{/js_compare}}" data-status="cancelled" data-order-id="{{order_id}}">cancelled</a>
+
+              </div>
+           {{/js_compare}}
+
+
+            </li>
+
+
+
+
+    </script>
+    <script type="text/template7" id="messagestemplate">
+        <div class="popup" id="messages-popup">
+            <div data-page="message" class="page">
+                <div class="page-content">
+                    <div class="messages">
+                        <div class="{{type}}-message">
+                            <i class="icon {{icon}}"></i>
+                            <p>{{content}}</p>
+                            {{#if haslink}}
+                            <a href="{{href}}">{{linkText}}</a> {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/template7" id="order_details">
+    <div class="popup-details">
+        <div class= "   ">
+        <div class="navbar">
+            <div class="navbar-inner navbar-items">
+                <div class="left  ">
+                    <a href="#" class="back link">
+                        <i class="icon back-icon"></i>
+                        <span></span>
+                    </a>
+                </div>
+                <div class="center sliding">
+                    <span class="app-title" >Order Number: #{{order_number}}</span>
+                </div>
+                <div class="right">
+
+                </div>
+            </div>
+        </div>
+        <div class="pages">
+            <div data-page="order-items" class="page">
+			  <div class="toolbar toolbar-bottom order-toolbar">
+              {{#js_compare "this.or_status_name !== 'waiting'"}}
+              <div class="toolbar-inner">
+					<p class="buttons-row btns-toolbar" data-status = "{{or_status_name}}">
+						  <a href="#" class="button btn-ready {{#js_compare "this.or_status_name === 'ready'"}}active{{/js_compare}}" data-status="ready" data-order-id="{{order_id}}">Ready</a>
+						  <a href="#" class="button btn-delivered {{#js_compare "this.or_status_name === 'delivered'"}}active{{/js_compare}}" data-status="delivered" data-order-id="{{order_id}}">Delivered</a>
+						  <a href="#" class="button btn-cancelled {{#js_compare "this.or_status_name === 'cancelled'"}}active{{/js_compare}}" data-status="cancelled" data-order-id="{{order_id}}">Cancelled</a>
+        </p>
+        </div>
+              {{/js_compare}}
+
+
+
+			  </div>
+
+                <div class="page-content">
+                    <div class="list-block orderinfo-list">
+                        <ul>
+                            <li class=" item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">Total</div>
+                                    <div class="item-after">{{order_total_value}} SR.</div>
+                                </div>
+                            </li>
+							<li class=" item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">Status</div>
+                                    <div class="item-after">
+										<span class="order-details-status" data-status = "{{or_status_name}}">{{or_status_name}}</span>
+									</div>
+                                </div>
+                            </li>
+							<li class=" item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">Customer Name</div>
+                                    <div class="item-after"><span>{{first_name}} {{last_name}} {{js "trust(this.customer_trust)"}}</span></div>
+                                </div>
+                            </li>
+							<li class=" item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">Customer Phone</div>
+                                    <div class="item-after"><a href="tel:{{phone}}" class="external" ><span>{{phone}}</span></a></div>
+                                </div>
+                            </li>
+                            <li class=" item-content">
+                                <div class="item-inner">
+                                 {{#branch}}
+                                    <div class="item-title">Branch</div>
+                                    <div class="item-after">{{branch_code}} / {{branch_name_en}}</div>
+                                {{/branch}}
+                                {{#address}}
+                                    <div class="item-title">Address</div>
+                                    <div class="item-after">{{branch_address_en}}</div>
+                                {{/address}}
+                                </div>
+                            </li>
+                            <li class=" item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">Date / Time</div>
+                                    <div class="item-after"><span>{{js "formatDate(this.order_date)"}}</span></div>
+                                </div>
+                            </li>
+                            <li class=" item-content">
+                                <div class="item-note">
+                                    <div class="item-note-title">Note</div>
+                                    <div class="item-note-content"><p>{{order_note}}</p></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+
+					<div class="list-block media-list order_items">
+                        <ul>
+						 {{#each this.details}}
+							<li>
+							  <div class="item-content">
+								<div class="item-media"><img src="{{product_image_en}}" width="80"></div>
+								<div class="item-inner">
+								  <div class="item-title-row">
+									<div class="item-title">{{product_name_en}}</div>
+									<div class="item-after">{{price}} SR.</div>
+								  </div>
+								  <div class="item-subtitle">Qty: {{quantity}}</div>
+								  <div class="item-text">Subtotal: {{quantity}} X {{price}} = {{subtotal}} SR.</div>
+								  <div class="item-text"><strong>Note:</strong> {{note}} </div>
+                                   <div class="options" >
+                                        <h6>Options</h6>
+                                        {{#each options}}
+                                         <span>
+                                              {{#compare this.value "1"}} <small class="green">With</small>
+                                                                {{else}}  <small class="red">Without</small>
+                                              {{/compare}}
+                                                 {{name_en}}
+                                           </span>
+                                        {{/each}}
+                                        </div>
+								</div>
+							  </div>
+							</li>
+						 {{/each}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+          </div>
+        </div>
+    </script>
+
+
+
+
+    <script type="text/template7" id="loginTemplate">
+<div class="pages">
+   <div class="navbar">
+  <div class="navbar-inner" data-color="transparent">
+    <div class="left">
+
+    </div>
+    <div class="center sliding"></div>
+    <div class="right">
+
+    </div>
+  </div>
+</div>
+    <div data-page="signup" class="page page_signup">
+                <div class="page-content">
+                    <div class="  flex-display">
+                        <span class="t-center s-logo">
+                    <i class="icon icon-logo"></i>
+                    </span>
+                        <form id="signin-form" class="signin_form">
+                            <div class="list-block">
+                                <ul>
+                                    <li>
+                                        <div class="item-input input-name">
+                                            <input type="text" name="username" class="input" placeholder="Username">
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="item-input  input-password">
+                                            <input type="password" name="password" class="input" placeholder="Password">
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <button type="submit" class="button button-round button-big button-fill yellow-bg">Login</button>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+    </div>
+</div>
+    </script>
+      <script type="text/javascript">
+             var activeOrdersFilter = 'received';
+    </script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/framework7.js"></script>
+
+    <script type="text/javascript" >
+
+            function callNoti(api_url){
+                var push = PushNotification.init({
+                android: {
+                    senderID: "907846407037"
+                },
+                ios: {
+                    alert: "true",
+                    badge: "true",
+                    sound: "true"
+                },
+                windows: {}
+            });
+
+                push.on('registration', function(data) {
+                 $$.post(api_url + 'set_regid',{'regid':data.registrationId },function(data){
+                 });
+
+            });
+            push.on('notification', function(data) {
+                activeOrdersFilter = 'received';
+                            SaveToStorage(data.additionalData.order_id);
+                            countbadge();
+                             myApp.mainView.router.refreshPage();
+                $$('[data-filter="'+activeOrdersFilter+'"]').click();
+                          var pageName = myApp.mainView.activePage.name;
+                                         myApp.addNotification({
+                                         title:data.title ,
+                                         message:data.message,
+                                         closeOnClick:true,
+                                         onClick:function(){}
+                                         });
+                                         setTimeout(function(){
+                                             myApp.closeNotification('.notifications');
+                                         },2000);
+        });
+            }
+    </script>
+    <script type="text/javascript" src="js/cashier-app.min.js"></script>
+    <script>
+        function onLoad() {
+            document.addEventListener("deviceready", onDeviceReady, false);
+        }
+         function onDeviceReady() {
+            document.addEventListener("backbutton", onBackKeyDown, false);
+            document.addEventListener("offline", onOffline, false);
+            document.addEventListener("online", onOnline, false);
+        }
+        function onOnline(){
+            var element =  document.getElementById('net-popup');
+                if (typeof(element) != 'undefined' && element != null)
+                {
+                 myApp.closeModal('#net-popup');
+                }
+        }
+        function onBackKeyDown(e) {
+            if ((myApp.mainView.activePage.name == 'index') && confirm('Are you sure you want to exit?')){
+                 navigator.app.exitApp();
+            }else{
+                 myApp.mainView.router.back();
+            }
+        }
+        function checkConnection() {
+            myApp.showIndicator();
+            var networkState = navigator.connection.type;
+            setTimeout(function(){
+                if(networkState == Connection.NONE){
+                myApp.hideIndicator();
+                 return false;
+            }
+                myApp.hideIndicator();
+                onOnline()
+            },500)
+        }
+        function onOffline() {
+        var meshtml ='<div class="popup" id="net-popup">'+
+        ' <div data-page="message" class="page">'+
+        ' <div class="page-content">'+
+        ' <div class="messages flex-display">'+
+        ' <div class="nointernet-message">'+
+        '  <i class="icon icon-nointernet"></i>'+
+        ' <p>No network connection</p>'+
+        '  <button onclick="checkConnection()" class="button btn-network">please Try Again</button> '+
+        '  <button onclick="navigator.app.exitApp();" class="button btn-exit">Exit</button> '+
+        ' </div></div></div></div></div>';
+                    myApp.popup(meshtml);
+            }
+    </script>
+</body>
+</html>

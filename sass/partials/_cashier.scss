@@ -1,0 +1,166 @@
+.list-box{
+    display: block;
+    position: fixed;
+    background: #962430;
+    left: 0;
+    box-shadow: 0 2px 1px -1px #5F161E inset;
+     @include size(100%, 60px );
+    z-index: 1000;
+     top: 44px;
+.list-btns{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li{
+        display: inline-block;
+        @include square(60px);
+        a{
+            @include square(100%);
+            padding: 6px;
+            display: block;
+            text-align: center;
+            img{
+              @include square(50px);
+            }
+            &.active-state{
+                background: darken(#962430 ,5%);
+            }
+			&.active{
+				background:#000;
+			}
+            .noti-badge{
+                position: absolute;
+                bottom: -5px;
+                background: $yellow;
+                color: $bg;
+            }
+        }
+    }
+}
+}
+
+
+.index-nav{
+    height: 44px;
+}
+.btns-toolbar{
+    background: darken($red,30%);
+    .button{
+        border-radius: 0 !important;
+        border:0;
+        &.btn-ready{
+
+        }
+    }
+}
+
+#myorders{
+    background: transparent;
+    &:before,&:after{
+        background:transparent;
+    }
+    li.swipeout{
+        margin-bottom: 10px;
+    .item-inner{
+          display: block;
+        padding: 0;
+        margin: 0;
+        background: $fg;
+        .card{
+            margin: 0;
+        }
+        }
+        .swipeout-actions-right{
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: column;
+                -ms-flex-direction: column;
+                    flex-direction: column;
+            height: 100%;
+            a{
+                background: #7B7B7B;
+                min-width: 100px;
+                height: 33.33%;
+                border-top: 1px solid rgba($bg,.3);
+               -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-align-content: center;
+      -ms-flex-line-pack: center;
+          align-content: center;
+                text-align: center;
+                padding: 0;
+                &.btn-ready{
+                   border-top: 0;
+                    &.active-state{
+                        background: darken($rss,10%);
+                    }
+                    &.active{
+                         background: $rss;
+                    }
+                }
+                &.btn-delivered{
+
+                    &.active-state{
+                        background: darken($blue,10%);
+                    }
+                    &.active{
+                        background:$blue ;
+                    }
+                }
+                &.btn-canceled{
+
+                    &.active-state{
+                        background: darken($red,10%);
+                    }
+                    &.active{
+                        background:lighten($red,10%) ;
+                    }
+                }
+                &.disabled{
+                    background: $bg;
+                }
+            }
+        }
+    }
+}
+
+.app-title{
+    font-size: 18px;
+}
+.list-block{
+.item-text{
+    height: auto;
+    strong{
+        color: $bg;
+        display: block;
+    }
+}
+    }
+
+.star-icon{
+    top: -2px;
+    @include square(12px);
+    background-image:url("#{$img_src}cashier/star.svg");
+}
+
+
+
+.time{
+    background: #f0c318;
+    display: inline-block;
+    padding: 5px 50px;
+    border-radius: 15px;
+    color: #000000;
+    margin: 0  0 10px 0;
+}

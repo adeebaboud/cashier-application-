@@ -1,0 +1,14 @@
+ http://192.168.1.50:8888/shawermatec/api2/index.php/api/cashier/order_status/23/ready
+http://192.168.1.50:8888/shawermatec/api2/index.php/api/cashier/order_status/23/canceled
+http://192.168.1.50:8888/shawermatec/api2/index.php/api/cashier/order_status/23/delivered 
+
+
+http://192.168.1.50:8888/shawermatec/api2/index.php/api/cashier/branch_orders/canceled
+http://192.168.1.50:8888/shawermatec/api2/index.php/api/cashier/branch_orders/ready
+http://192.168.1.50:8888/shawermatec/api2/index.php/api/cashier/branch_orders/all
+http://192.168.1.50:8888/shawermatec/api2/index.php/api/cashier/branch_orders/delivered
+
+
+
+AIzaSyA3cjFBWQVd8qF8Uw_BTe9r3EyI2F9yaME 
+AIzaSyDyoKDu1OIkfKn9tPkpiwb0gZd7kJ6tTrY

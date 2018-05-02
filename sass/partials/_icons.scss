@@ -1,0 +1,195 @@
+.back-icon{
+    @include square(30px);
+    margin-#{$right}: 10px;
+    background-image:url("#{$img_src}icons/back.svg");
+}
+.home-icon{
+   @include square(30px);
+    background-image:url("#{$img_src}icons/home.svg");
+}
+.bag-icon{
+    @include square(30px);
+    background-image:url("#{$img_src}icons/bag.svg");
+}
+
+.icon-logo{
+    @include size(250px,218px);
+     background-image:url("#{$img_src}logo.svg");
+     @media #{'only screen and (min-width: 768px)'}{
+     @include size(350px,318px);
+}
+}
+.nav-home-icon{
+   @include square(30px);
+    background-image:url("#{$img_src}icons/icon-home.svg");
+}
+.nav-icon-menu{
+   @include square(30px);
+    background-image:url("#{$img_src}icons/icon-menu.svg");
+}
+.nav-cart-icon{
+   @include square(30px);
+    background-image:url("#{$img_src}icons/icon-nav-cart.svg");
+}
+.icon-star{
+   @include square(12px);
+    background-image:url("#{$img_src}icons/icon-star-fill.svg");
+}
+
+
+
+
+.navbar-messages{
+    a{
+        color: $fg;
+    }
+}
+.messages{
+    width: 100%;
+
+    position: relative;
+    margin-top:0;
+    text-align: center;
+      display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+   -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-align-content: center;
+      -ms-flex-line-pack: center;
+          align-content: center;
+    height: 100vh;
+    height: 100%;
+    box-sizing: border-box;
+}
+.success-message{
+    width: 80%;
+    i.icon-success{
+        width:125px ;
+        height:125px ;
+        background: url('#{$img_src}icons/success.svg') center center no-repeat;
+        background-size: cover;
+    }
+    a{
+        color: $green;
+    }
+}
+ .info-message{
+     width: 80%;
+    i.icon-info{
+        width:125px ;
+        height:125px ;
+        background: url('#{$img_src}icons/info.svg') center center no-repeat;
+        background-size: cover;
+    }
+    a{
+        color: $green;
+    }
+}
+.danger-message{
+    width: 80%;
+    i.icon-danger{
+        width:125px ;
+        height:125px ;
+        background: url('#{$img_src}icons/danger.svg') center center no-repeat;
+        background-size: cover;
+    }
+    a{
+        color: $red;
+    }
+}
+.warning-message{
+    width: 80%;
+    i.icon-warning{
+        width:125px ;
+        height:125px ;
+        background: url('#{$img_src}icons/warning.svg') center center no-repeat;
+        background-size: cover;
+    }
+    a{
+        color: $green;
+    }
+}
+.nointernet-message{
+    width: 80%;
+    i.icon-nointernet{
+        width:125px ;
+        height:125px ;
+        background: url('#{$img_src}icons/nointernet.svg') center center no-repeat;
+        background-size: cover;
+    }
+    a{
+        color: $red;
+    }
+}
+
+.btn-network{
+    background-color: $yellow;
+}
+.btn-exit{
+     background-color: $red;
+}
+.btn-exit,.btn-network{
+    height: 55px;
+    padding: 10px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    color: $fg;
+   border-radius: 27px;
+    border: 0;
+}
+
+
+i.icon-login{
+        width:25px ;
+        height:25px ;
+        background: url('#{$img_src}icons/login.svg') center center no-repeat;
+        background-size: cover;
+    }
+
+i.icon-edit{
+        width:25px ;
+        height:25px ;
+        background: url('#{$img_src}icons/edit.svg') center center no-repeat;
+        background-size: cover;
+}
+
+i.icon-close-round{
+        width:20px ;
+        height:20px ;
+        background: url('#{$img_src}icons/icon-close-round.svg') center center no-repeat;
+        background-size: cover;
+}
+i.icon-pen{
+        width:20px ;
+        height:20px ;
+        background: url('#{$img_src}icons/icon-white-pen.svg') center center no-repeat;
+        background-size: cover;
+}
+i.icon-phone{
+        width:18px ;
+        height:18px ;
+        background: url('#{$img_src}icons/phone.svg') center center no-repeat;
+        background-size: cover;
+}
+i.icon-address{
+        width:18px ;
+        height:18px ;
+        background: url('#{$img_src}icons/address.svg') center center no-repeat;
+        background-size: cover;
+}
+
+
+

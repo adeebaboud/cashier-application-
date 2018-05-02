@@ -1,0 +1,42 @@
+form[class*="pick_"] {
+	.item-input{
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-radius: 25px;
+            background-color: $fg;
+            background-size: 25px;
+            background-repeat: no-repeat;
+            background-position: 94% 50%;
+
+            &.input-branch{
+                 background-image: url('#{$img-src}icons/icon-downblue.svg') ;
+            }
+            &.input-time{
+                  background-image: url('#{$img-src}icons/icon-clock.svg') ;
+            }
+            .input{
+                border-radius: 25px;
+                padding-#{$left}: 15px;
+                background-color:transparent;
+                text-transform: capitalize;
+            }
+        }
+        .list-block ul{
+            background: transparent;
+            border: none;
+            &:before, &:after{
+                background: transparent;
+            }
+        }
+}
+
+
+.page[data-page$="-place"]{
+      @include to-color($yellow,$yellow,$blue);
+}
+.page[data-page$="-place"]{
+    @include to-color($purple,$purple,$fg);
+}
+#calendarinput{
+    padding-#{$left}: 15px;
+}
